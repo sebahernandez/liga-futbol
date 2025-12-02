@@ -1,130 +1,103 @@
-# Liga Fútbol API 🏆
+# Liga Fútbol API
 
-API REST desarrollada con **Spring Boot 3.5.0** para la gestión de ligas de fútbol, equipos, partidos y resultados.
-
-## 📋 Características
-
-- ✅ **Spring Boot 3.5.0** - Framework moderno y actualizado
-- ✅ **Spring Data JPA** - Acceso a datos con Hibernate
-- ✅ **PostgreSQL** - Base de datos relacional robusta
-- ✅ **REST API** - Endpoints RESTful para gestión de recursos
-- ✅ **Docker** - Contenedorización con Docker Compose
-- ✅ **Java 21** - Última versión LTS de Java
-- ✅ **Lombok** - Reducción de boilerplate code
-- ✅ **Validación** - Bean Validation integrado
+API REST desarrollada con **Spring Boot 3.5.0** para gestión de equipos, ligas y partidos de fútbol.
 
 ## 🚀 Requisitos Previos
 
 - **Java 21** o superior
 - **Maven 3.9.x** o superior
-- **Docker & Docker Compose** (opcional, para ejecutar con PostgreSQL)
+- **Docker & Docker Compose** (para base de datos PostgreSQL)
 
-## 📦 Instalación y Configuración
+## 📦 Instalación
 
 ### 1. Clonar el repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/liga-futbol.git
+git clone https://github.com/sebahernandez/liga-futbol.git
 cd liga-futbol
 ```
 
-### 2. Configurar variables de entorno (opcional)
-
-Crear archivo `.env` en la raíz del proyecto:
-
-```bash
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-POSTGRES_DB=liga_futbol
-```
-
-### 3. Iniciar la base de datos con Docker
+### 2. Iniciar PostgreSQL con Docker
 
 ```bash
 docker-compose up -d
 ```
 
-Esto iniciará:
-- **PostgreSQL 15** en puerto `5432`
-- **PgAdmin** en puerto `5050`
+Esto inicia PostgreSQL en puerto `5432` con base de datos `liga_futbol`.
 
-### 4. Compilar el proyecto
+### 3. Compilar
 
 ```bash
 mvn clean package -DskipTests
 ```
 
-### 5. Ejecutar la aplicación
+### 4. Ejecutar
 
 **Modo Desarrollo (H2 en memoria):**
-
 ```bash
-mvn clean spring-boot:run
+mvn spring-boot:run
 ```
 
 **Modo Producción (PostgreSQL):**
-
 ```bash
-mvn clean spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=prod"
+mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=prod"
 ```
 
-## 🌐 Acceso a la Aplicación
+API disponible en: `http://localhost:8080/api`
 
-| Servicio | URL | Usuario | Contraseña |
-|----------|-----|---------|-----------|
-| **API** | http://localhost:8080/api | - | - |
-| **PgAdmin** | http://localhost:5050 | admin@liga.com | admin |
-| **PostgreSQL** | localhost:5432 | postgres | postgres |
-
-## 📚 Estructura del Proyecto
+## 📂 Estructura
 
 ```
 liga-futbol/
-├── src/
-│   ├── main/
-│   │   ├── java/com/liga/futbol/
-│   │   │   ├── LigaFutbolApiApplication.java    # Aplicación principal
-│   │   │   ├── model/
-│   │   │   │   ├── entity/                      # Entidades JPA
-│   │   │   │   │   ├── Equipo.java
-│   │   │   │   │   ├── Liga.java
-│   │   │   │   │   └── Partido.java
-│   │   │   │   └── repository/                  # Repositorios Spring Data
-│   │   │   │       └── EquipoRepository.java
-│   │   │   ├── controller/                      # Controladores REST (próximamente)
-│   │   │   ├── service/                         # Lógica de negocio (próximamente)
-│   │   │   └── exception/                       # Manejo de excepciones (próximamente)
-│   │   └── resources/
-│   │       ├── application.yml                  # Configuración por defecto (H2)
-│   │       └── application-prod.yml             # Configuración producción (PostgreSQL)
-│   └── test/
-│       └── java/                                # Tests unitarios (próximamente)
-├── docker-compose.yml                           # Configuración Docker
-├── pom.xml                                      # Dependencias Maven
-├── .gitignore                                   # Archivos a ignorar en Git
-└── README.md                                    # Este archivo
-
+├── src/main/java/com/liga/futbol/
+│   ├── LigaFutbolApiApplication.java    # Aplicación principal
+│   ├── model/
+│   │   ├── entity/                      # Entidades JPA
+│   │   │   ├── Equipo.java
+│   │   │   ├── Liga.java
+│   │   │   └── Partido.java
+│   │   └── repository/                  # Repositorios
+│   │       └── EquipoRepository.java
+│   ├── controller/                      # REST Controllers (próximo)
+│   ├── service/                         # Lógica de negocio (próximo)
+│   └── exception/                       # Manejo de excepciones
+├── src/main/resources/
+│   ├── application.yml                  # Config. H2 (desarrollo)
+│   └── application-prod.yml             # Config. PostgreSQL
+├── docker-compose.yml                   # PostgreSQL + volumes
+├── pom.xml                              # Dependencias Maven
+└── README.md                            # Este archivo
 ```
 
-## 🛠️ Stack Tecnológico
+## 🏆 Equipos
 
-### Backend
-- **Java 21** - Lenguaje de programación
-- **Spring Boot 3.5.0** - Framework web
-- **Spring Data JPA** - Persistencia de datos
+El proyecto incluye datos de ejemplo con principales equipos chilenos:
+
+- **Colo Colo** - Santiago, fundado 1925
+- **Universidad de Chile** - Santiago, fundado 1927
+- **Deportes Iquique** - Iquique, fundado 1986
+- **Huachipato** - Talcahuano, fundado 1947
+- **Magallanes** - Punta Arenas, fundado 1911
+- **Cobreloa** - Calama, fundado 1945
+- **Palestino** - Santiago, fundado 1920
+- **Deportes Puerto Montt** - Puerto Montt, fundado 1948
+- **Audax Italiano** - Santiago, fundado 1910
+- **Antofagasta** - Antofagasta, fundado 1945
+
+## 🛠️ Tecnologías
+
+- **Java 21** - Lenguaje
+- **Spring Boot 3.5.0** - Framework
+- **Spring Data JPA** - Persistencia
 - **Hibernate 6.6** - ORM
 - **PostgreSQL 15** - Base de datos
-
-### Herramientas
-- **Maven** - Gestor de dependencias
+- **Maven** - Build tool
 - **Docker** - Contenedorización
-- **Lombok** - Reducción de código boilerplate
+- **Lombok** - Boilerplate reduction
 
-## 📖 Uso de la API
+## 📖 Modelos de Datos
 
-### Modelos de Datos
-
-#### Equipo
+### Equipo
 ```json
 {
   "id": 1,
@@ -134,7 +107,7 @@ liga-futbol/
 }
 ```
 
-#### Liga
+### Liga
 ```json
 {
   "id": 1,
@@ -144,7 +117,7 @@ liga-futbol/
 }
 ```
 
-#### Partido
+### Partido
 ```json
 {
   "id": 1,
@@ -156,41 +129,10 @@ liga-futbol/
 }
 ```
 
-## 🔄 Ciclo de Desarrollo
-
-### Crear una rama para nuevo feature
-```bash
-git checkout -b feature/tu-feature
-```
-
-### Hacer cambios y commit
-```bash
-git add .
-git commit -m "Descripción del cambio"
-```
-
-### Subir cambios
-```bash
-git push origin feature/tu-feature
-```
-
-### Crear Pull Request
-Ir a GitHub y crear un Pull Request
-
-## 🧪 Testing
+## 🐳 Comandos Docker
 
 ```bash
-# Ejecutar todos los tests
-mvn test
-
-# Tests con cobertura
-mvn clean test jacoco:report
-```
-
-## 🐳 Comandos Docker Útiles
-
-```bash
-# Ver estado de los contenedores
+# Ver contenedores activos
 docker-compose ps
 
 # Ver logs
@@ -199,55 +141,12 @@ docker-compose logs -f postgres
 # Detener servicios
 docker-compose stop
 
-# Reanudar servicios
+# Reiniciar servicios
 docker-compose start
 
 # Eliminar todo (incluyendo datos)
 docker-compose down -v
 ```
-
-## 📝 Variables de Entorno
-
-| Variable | Valor Por Defecto | Descripción |
-|----------|-------------------|-------------|
-| `SPRING_PROFILES_ACTIVE` | default | Perfil de Spring (dev, prod) |
-| `POSTGRES_USER` | postgres | Usuario de PostgreSQL |
-| `POSTGRES_PASSWORD` | postgres | Contraseña de PostgreSQL |
-| `POSTGRES_DB` | liga_futbol | Nombre de la base de datos |
-
-## 🚨 Solución de Problemas
-
-### Puerto 5432 ya está en uso
-```bash
-# Cambiar el puerto en docker-compose.yml o matar el proceso
-lsof -i :5432
-kill -9 <PID>
-```
-
-### Puerto 8080 ya está en uso
-```bash
-# Cambiar el puerto en application.yml
-lsof -i :8080
-kill -9 <PID>
-```
-
-### Conexión rechazada a PostgreSQL
-```bash
-# Verificar que Docker está corriendo
-docker ps
-
-# Reiniciar los servicios
-docker-compose restart
-```
-
-## 📋 Próximas Mejoras
-
-- [ ] Endpoints REST completos (CRUD)
-- [ ] Autenticación JWT
-- [ ] Tests unitarios e integración
-- [ ] Documentación Swagger/OpenAPI
-- [ ] Validaciones avanzadas
-- [ ] Paginación y filtrado
 - [ ] Caché con Redis
 - [ ] Monitoreo con Actuator
 
